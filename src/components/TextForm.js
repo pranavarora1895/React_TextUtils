@@ -44,6 +44,17 @@ export default function TextForm(props) {
     setText(event.target.value);
   };
 
+  const countWords = (someText) => {
+    someText = someText.replace(/(\r\n|\n|\r)/gm, "").trim();
+    const wordArray = someText.split(" ");
+    let count = 0;
+    for (let i of wordArray) {
+      if (i === " " || i === "") continue;
+      else count++;
+    }
+    return count;
+  };
+
   return (
     <>
       <div className="mb-3">
@@ -86,7 +97,7 @@ export default function TextForm(props) {
       <div className="my-3">
         <h2>Your Text Summary</h2>
         <p>
-          {text.split(" ").length} Words and {text.length} Characters
+          {countWords(text)} Words and {text.length} Characters
         </p>
         <p>
           Time to read this text is {text.split(" ").length * 0.008} minutes
